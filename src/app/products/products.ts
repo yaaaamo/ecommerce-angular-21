@@ -1,4 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { ProductsService } from '../shared/products.service';
 
 @Component({
@@ -6,13 +7,12 @@ import { ProductsService } from '../shared/products.service';
   standalone: true,
   templateUrl: './products.html'
 })
-export class Products {
+export class Products implements OnInit {
   private service = inject(ProductsService);
   products = signal<any[]>([]);
 
-  ngOnInit() {
-    this.service.getProducts().subscribe(data => {
-      this.products.set(data);
-    });
+  async ngOnInit() {
+    const data = await firstValueFrom(this.service.getProducts());
+    this.products.set(data);
   }
 }

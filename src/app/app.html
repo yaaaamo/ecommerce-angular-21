@@ -1,6 +1,15 @@
 <app-homepage></app-homepage>
 <nav>
   <button routerLink="/products">Products</button>
+  <button routerLink="/search">Search</button>
   <button routerLink="/cart">Cart</button>
 </nav>
 <router-outlet />
+
+<!-- 
+
+Homepage en haut (toujours visible, en SSR pour le SEO)
+Navigation avec deux boutons qui changent l'URL via routerLink
+<router-outlet /> où s'affichera soit Products, soit Cart selon l'URL
+
+-->

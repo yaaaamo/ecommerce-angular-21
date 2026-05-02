@@ -19,18 +19,22 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 
+
+  // Sert les fichiers statiques (JS bundlés, CSS, images). 
+  // Le index: false est crucial: il empêche Express de servir automatiquement index.html pour la route /, 
+  // ce qui laisse passer les requêtes vers le SSR.
+
   server.use(express.static(browserDistFolder, {maxAge: '1y', index: false,}));
 
   client.connect()
     .then(client => {
 			db = client.db("ECOMMERCE");
 		
-      server.get('/api/homepage', (_, res) => {
+      server.get('/api/homepage', async (_, res) => {
         console.log('/api/homepage');
-        res.json([
-          {"rayon":"Téléphonie", "promotion":0},
-          {"rayon":"Informatique", "promotion":15}
-        ]);
+        let docs = await db.collection("rayons").find().toArray();
+        res.json(docs);
+
       });
 
       server.get('/api/products', async (_, res) => {
@@ -39,6 +43,20 @@ export function app(): express.Express {
         res.json(documents);
       });
 
+      server.get('/api/catalogue/:rayon/:marque/:prixMax', async (req, res) => {
+        console.log('/api/catalogue', req.params);
+        const filtre: any = {};
+        if (req.params.rayon !== '*')  filtre.rayon  = req.params.rayon;
+        if (req.params.marque !== '*') filtre.marque = req.params.marque;
+        filtre.prix = { $lte: parseFloat(req.params.prixMax) };
+
+        const documents = await db.collection("articles")
+          .find(filtre, { projection: { _id: 0 } })
+          .toArray();
+        res.json(documents);
+      });
+
+      // Endpoint catch-all SSR
       server.get('{*splat}', async (req, res, next) => {
         const { protocol, originalUrl, baseUrl, headers } = req;
         console.log("Route SSR :", req.params.splat);

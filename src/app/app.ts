@@ -11,3 +11,7 @@ import { Homepage } from './homepage/homepage';
 export class App {
   protected readonly title = signal('ecommerce');
 }
+
+// Homepage est importé directement comme composant statique — il sera toujours affiché
+// RouterOutlet est l'emplacement où s'insèrent les composants routés
+// signal('ecommerce') → un signal Angular (réactif)

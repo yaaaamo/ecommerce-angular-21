@@ -12,3 +12,5 @@ export class HomepageService {
     return this.http.get<any[]>('/api/homepage');
   }
 }
+
+// Service singleton (providedIn: 'root') qui fait un GET sur /api/homepage
