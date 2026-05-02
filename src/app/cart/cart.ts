@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CartService } from '../shared/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -6,7 +7,5 @@ import { Component, signal } from '@angular/core';
   templateUrl: './cart.html'
 })
 export class Cart {
-  items = signal<any[]>([]);
-
-  ngOnInit() {}
+  cart = inject(CartService);
 }

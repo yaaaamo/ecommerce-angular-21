@@ -2,8 +2,8 @@
 <nav>
   <button routerLink="/products">Products</button>
   <button routerLink="/search">Search</button>
-  <button routerLink="/cart">Cart</button>
   <button routerLink="/users">Users</button>
+  <button routerLink="/cart">Cart ({{ cart.itemCount() }})</button>
 </nav>
 <router-outlet />
 

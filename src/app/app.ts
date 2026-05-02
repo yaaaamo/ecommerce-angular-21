@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { Homepage } from './homepage/homepage';
+import { CartService } from './shared/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { Homepage } from './homepage/homepage';
 })
 export class App {
   protected readonly title = signal('ecommerce');
+  cart = inject(CartService);
 }
 
 // Homepage est importé directement comme composant statique — il sera toujours affiché

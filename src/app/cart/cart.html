@@ -1,3 +1,22 @@
 <h1>Votre panier</h1>
-<ul>
-</ul>
+
+@if (cart.items().length === 0) {
+    <p>Votre panier est vide.</p>
+    } @else {
+    <ul>
+        @for (item of cart.items(); track item.nom) {
+        <li>
+            <strong>{{ item.nom }}</strong> ({{ item.marque }})
+            — {{ item.prix }}€
+            — Quantité : {{ item.quantity }}
+            <button (click)="cart.removeItem(item.nom)">−</button>
+            <button (click)="cart.addItem(item)">+</button>
+        </li>
+        }
+    </ul>
+
+    <p><strong>Total : {{ cart.total() }}€</strong></p>
+    <p>{{ cart.itemCount() }} article(s)</p>
+
+    <button (click)="cart.clear()">Vider le panier</button>
+}

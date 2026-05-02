@@ -1,6 +1,9 @@
 <h1>Liste des produits</h1>
 <ul>
-  @for (p of products(); track p.name) {
-    <li>{{ p.nom }}</li>
+  @for (p of products(); track p.nom) {
+    <li>
+      <strong>{{ p.nom }}</strong> ({{ p.marque }}) — {{ p.prix }}€
+      <button (click)="cart.addItem(p)">Ajouter au panier</button>
+    </li>
   }
 </ul>

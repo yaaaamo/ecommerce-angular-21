@@ -22,13 +22,13 @@
         @for (a of resultats(); track a.nom) {
             <li>
             <strong>{{ a.nom }}</strong> ({{ a.marque }}) — {{ a.prix }}€
+            <button (click)="cart.addItem(a)">Ajouter au panier</button>
             <br><small>{{ a.descr }}</small>
             </li>
         }
         </ul>
     }
 }
-
 
 
 <!-- 

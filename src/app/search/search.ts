@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SearchService } from '../shared/search.service';
+import { CartService } from '../shared/cart.service';
 
 @Component({
   selector: 'app-search',
@@ -10,6 +11,7 @@ import { SearchService } from '../shared/search.service';
 })
 export class Search {
   private service = inject(SearchService);
+  cart = inject(CartService);
 
   // Critères de recherche (liés au formulaire via [(ngModel)])
   rayon = '';

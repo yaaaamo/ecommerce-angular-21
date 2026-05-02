@@ -8,7 +8,7 @@ export class UserService {
     private http = inject(HttpClient);
 
     getUsers():Observable<any[]> {
-        return this.http.get<any[]>('/api/products');
+        return this.http.get<any[]>('/api/users');
     }
 }
 
