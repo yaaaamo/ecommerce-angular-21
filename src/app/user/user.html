@@ -1,0 +1,12 @@
+<h1>Liste des users</h1>
+
+<ul>
+    @for (u of users(); track u.nom) {
+        <li>{{u.nom}}</li>
+        <li>{{u.email}}</li>
+    }
+</ul>
+
+
+
+

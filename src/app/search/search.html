@@ -1,33 +1,35 @@
 <h1>Rechercher un article</h1>
 
 <form (ngSubmit)="onSubmit()" #f="ngForm">
-  <label>Rayon :</label>
-  <input type="text" name="rayon" [(ngModel)]="rayon" placeholder="(laisser vide pour tous)">
+    <label>Rayon :</label>
+    <input type="text" name="rayon" [(ngModel)]="rayon" placeholder="(laisser vide pour tous)">
 
-  <label>Marque :</label>
-  <input type="text" name="marque" [(ngModel)]="marque" placeholder="(laisser vide pour toutes)">
+    <label>Marque :</label>
+    <input type="text" name="marque" [(ngModel)]="marque" placeholder="(laisser vide pour toutes)">
 
-  <label>Prix max :</label>
-  <input type="number" name="prixMax" [(ngModel)]="prixMax" required>
+    <label>Prix max :</label>
+    <input type="number" name="prixMax" [(ngModel)]="prixMax" required>
 
-  <button type="submit">Rechercher</button>
-</form>
+    <button type="submit">Rechercher</button>
+    </form>
 
-@if (recherchee()) {
-  <h2>Résultats ({{ resultats().length }})</h2>
-  @if (resultats().length === 0) {
-    <p>Aucun article trouvé.</p>
-  } @else {
-    <ul>
-      @for (a of resultats(); track a.nom) {
-        <li>
-          <strong>{{ a.nom }}</strong> ({{ a.marque }}) — {{ a.prix }}€
-          <br><small>{{ a.descr }}</small>
-        </li>
-      }
-    </ul>
-  }
+    @if (recherchee()) {
+    <h2>Résultats ({{ resultats().length }})</h2>
+    @if (resultats().length === 0) {
+        <p>Aucun article trouvé.</p>
+    } @else {
+        <ul>
+        @for (a of resultats(); track a.nom) {
+            <li>
+            <strong>{{ a.nom }}</strong> ({{ a.marque }}) — {{ a.prix }}€
+            <br><small>{{ a.descr }}</small>
+            </li>
+        }
+        </ul>
+    }
 }
+
+
 
 <!-- 
 Le [(ngModel)]="rayon" réalise le two-way binding (page 48 du 1er PDF) : 

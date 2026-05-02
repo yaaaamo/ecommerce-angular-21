@@ -43,6 +43,12 @@ export function app(): express.Express {
         res.json(documents);
       });
 
+      server.get('/api/users', async (_, res)=>{
+        console.log('/api/users');
+        let docs = await db.collection("users").find().toArray();
+        res.json(docs);
+      })
+
       server.get('/api/catalogue/:rayon/:marque/:prixMax', async (req, res) => {
         console.log('/api/catalogue', req.params);
         const filtre: any = {};
@@ -55,6 +61,10 @@ export function app(): express.Express {
           .toArray();
         res.json(documents);
       });
+
+
+
+      
 
       // Endpoint catch-all SSR
       server.get('{*splat}', async (req, res, next) => {
