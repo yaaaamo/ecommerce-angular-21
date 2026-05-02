@@ -1,5 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { isPlatformServer } from '@angular/common';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,8 +8,12 @@ import { Observable } from 'rxjs';
 })
 export class HomepageService {
   private http = inject(HttpClient);
+  private platformId = inject(PLATFORM_ID);
 
   getHomepage(): Observable<any[]> {
+    const base = isPlatformServer(this.platformId)
+      ? 'http://localhost:4000'
+      : '';
     return this.http.get<any[]>('/api/homepage');
   }
 }

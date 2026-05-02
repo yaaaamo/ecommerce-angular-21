@@ -60,6 +60,7 @@ export function app(): express.Express {
       server.get('{*splat}', async (req, res, next) => {
         const { protocol, originalUrl, baseUrl, headers } = req;
         console.log("Route SSR :", req.params.splat);
+        console.log("SSR catch-all hit:", req.originalUrl);
 
         commonEngine
           .render({
