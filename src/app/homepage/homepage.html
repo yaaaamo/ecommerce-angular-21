@@ -1,0 +1,6 @@
+<h1>Les promotions</h1>
+<ul>
+  @for (rayon of rayons().filter(r => r.promotion > 0); track rayon.id) {
+    <li>Sur le rayon {{ rayon.rayon }} : promotion de {{ rayon.promotion }}%</li>
+  }
+</ul>
